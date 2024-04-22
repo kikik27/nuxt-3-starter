@@ -28,7 +28,6 @@ export default defineNuxtConfig({
     MODE: process.env.NUXT_MODE, // important
     public: {
       BASE_URL_PUBLIC: process.env.NUXT_BASE_URL_PUBLIC,
-      BASE_URL_WEBSOCKET: process.env.NUXT_BASE_URL_WEBSOCKET,
       TOKEN_EXPIRES_IN_PUBLIC: Number(process.env.NUXT_TOKEN_EXPIRES_IN_PUBLIC), // important
     },
   },
