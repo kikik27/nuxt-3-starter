@@ -1,7 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const auth = useAuth();
-  const counseling = useCounseling();
-  const appointment = useAppointment();
   const token = useCookie("token").value;
 
   if (token) {
@@ -10,14 +8,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   const authenticatedPaths = [
     "/dashboard",
-    "/auth/profile",
-    "/chat",
-    "/",
-    "/appointment",
-    "/history",
-    "/counseling",
-    "/teacher",
-    "/student",
+    "/"
   ];
   const adminPaths = ["/teacher", "/student"];
 
@@ -33,37 +24,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       statusCode: 401,
       statusMessage: "Unauthorized",
     });
-  }
-
-  if (auth.isAuth_data) {
-    if (auth.user_data.role === "teacher" && to.path === "/dashboard") {
-      await appointment.getData(undefined, undefined, [
-        {
-          key: "category",
-          val: "offline",
-        },
-      ]);
-    }
-
-    if (auth.user_data.role === "student") {
-      if (to.path === "/appointment") {
-        await appointment.getData(undefined, undefined, [
-          {
-            key: "category",
-            val: to.path === "/counseling" ? "online" : "offline",
-          },
-        ]);
-      }
-
-      if (to.path === "/dashboard") {
-        await appointment.getData(undefined, undefined, [
-          {
-            key: "category",
-            val: "offline",
-          },
-        ]);
-      }
-    }
   }
 
   if (auth.isAuth_data && to.path === "/auth/login") {

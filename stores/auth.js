@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { socket } from "@/socket/notifications";
 // const nuxtApp = useNuxtApp()
 
 export const useAuth = defineStore("auth", {
